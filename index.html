@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prathamesh Sonawane — AI & Data Science Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F7F4;
+    --surface:#FFFFFF;
+    --ink:#12181A;
+    --ink-soft:#525B5D;
+    --ink-faint:#8D9694;
+    --accent:#0E8F6B;
+    --accent-soft:#E4F4EC;
+    --line:#E3E5DF;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,247,244,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:0.02em;}
+  .logo span{color:var(--accent);}
+  .navlinks{display:flex;gap:28px;font-size:14px;color:var(--ink-soft);}
+  .navlinks a{transition:color .15s;}
+  .navlinks a:hover{color:var(--accent);}
+  .nav-cta{
+    font-family:var(--mono);font-size:12.5px;
+    border:1px solid var(--ink);
+    padding:7px 14px;border-radius:2px;
+    transition:all .15s;
+  }
+  .nav-cta:hover{background:var(--ink);color:var(--bg);}
+  .navlinks-wrap{display:flex;align-items:center;gap:32px;}
+  @media (max-width:720px){.navlinks{display:none;}}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:88px 0 64px;}
+  .hero-grid{
+    max-width:700px;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:0.08em;
+    color:var(--accent);text-transform:uppercase;margin-bottom:18px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:'';width:7px;height:7px;background:var(--accent);border-radius:50%;display:inline-block;}
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(38px,5vw,58px);
+    line-height:1.04;letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+  h1 em{font-style:normal;color:var(--accent);}
+  .hero-lede{
+    font-size:17px;color:var(--ink-soft);max-width:520px;margin-bottom:30px;
+  }
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:13px;padding:12px 20px;
+    border-radius:2px;transition:all .15s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--ink);color:var(--bg);}
+  .btn-primary:hover{background:var(--accent);}
+  .btn-secondary{border:1px solid var(--line);color:var(--ink);}
+  .btn-secondary:hover{border-color:var(--ink);}
+
+  /* ---------- DATA STRIP (signature element) ---------- */
+  .datastrip{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--surface);
+  }
+  .datastrip .wrap{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .datacell{
+    padding:22px 24px;
+    border-right:1px solid var(--line);
+    font-family:var(--mono);
+  }
+  .datacell:last-child{border-right:none;}
+  .datacell .k{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
+  .datacell .v{font-size:19px;font-weight:500;color:var(--ink);}
+  @media (max-width:720px){
+    .datastrip .wrap{grid-template-columns:repeat(2,1fr);}
+    .datacell{border-bottom:1px solid var(--line);}
+  }
+
+  /* ---------- SECTION shared ---------- */
+  section{padding:88px 0;}
+  .section-head{margin-bottom:44px;}
+  .section-num{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin-bottom:10px;}
+  h2{font-family:var(--display);font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-0.01em;}
+  .section-sub{color:var(--ink-soft);font-size:15px;margin-top:10px;max-width:520px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-body{font-size:16.5px;color:var(--ink-soft);max-width:680px;}
+  .about-body strong{color:var(--ink);font-weight:600;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .xp-item{
+    display:grid;grid-template-columns:180px 1fr;gap:24px;
+    padding:26px 0;border-top:1px solid var(--line);
+  }
+  .xp-item:last-child{border-bottom:1px solid var(--line);}
+  .xp-role-date{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);}
+  .xp-title{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:4px;}
+  .xp-org{color:var(--accent);font-weight:500;font-size:14.5px;margin-bottom:12px;}
+  .xp-item ul{padding-left:18px;color:var(--ink-soft);font-size:15px;}
+  .xp-item li{margin-bottom:6px;}
+  @media (max-width:640px){.xp-item{grid-template-columns:1fr;gap:8px;}}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .skill-card{background:var(--surface);padding:26px 24px;}
+  .skill-card .cat{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:12px;}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-tags span{
+    font-size:13px;background:var(--accent-soft);color:var(--ink);
+    padding:5px 10px;border-radius:3px;
+  }
+  @media (max-width:720px){.skills-grid{grid-template-columns:1fr;}}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .proj-card{
+    border:1px solid var(--line);background:var(--surface);
+    padding:28px;border-radius:6px;
+    transition:border-color .15s, transform .15s;
+  }
+  .proj-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .proj-num{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin-bottom:14px;}
+  .proj-title{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:10px;}
+  .proj-desc{color:var(--ink-soft);font-size:14.5px;margin-bottom:16px;}
+  .proj-link{font-family:var(--mono);font-size:12.5px;color:var(--accent);display:inline-flex;align-items:center;gap:5px;}
+  @media (max-width:720px){.proj-grid{grid-template-columns:1fr;}}
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .ach-list{border-top:1px solid var(--line);}
+  .ach-item{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:16px 0;border-bottom:1px solid var(--line);
+    font-size:15px;gap:16px;
+  }
+  .ach-item .name{color:var(--ink);}
+  .ach-item .year{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);white-space:nowrap;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    background:var(--ink);color:var(--bg);
+    border-radius:10px;padding:56px 48px;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;
+  }
+  .contact-panel h2{color:#fff;}
+  .contact-panel .section-sub{color:rgba(255,255,255,0.6);}
+  .contact-links{display:flex;flex-direction:column;gap:14px;}
+  .contact-links a{
+    font-family:var(--mono);font-size:14.5px;
+    display:flex;justify-content:space-between;
+    padding:14px 16px;border:1px solid rgba(255,255,255,0.15);
+    border-radius:4px;transition:all .15s;
+  }
+  .contact-links a:hover{border-color:var(--accent);background:rgba(14,143,107,0.14);}
+  .contact-links a .arrow{color:var(--accent);}
+  @media (max-width:720px){.contact-panel{grid-template-columns:1fr;padding:36px 24px;}}
+
+  footer{padding:32px 0 48px;}
+  footer .wrap{
+    display:flex;justify-content:space-between;
+    font-family:var(--mono);font-size:12px;color:var(--ink-faint);
+    border-top:1px solid var(--line);padding-top:24px;
+  }
+
+  .fade-in{opacity:0;transform:translateY(14px);animation:fadeUp .7s ease forwards;}
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
+  @media (prefers-reduced-motion: reduce){
+    .fade-in{animation:none;opacity:1;transform:none;}
+    .reveal{transition:none !important;opacity:1 !important;transform:none !important;}
+  }
+
+  /* ---------- micro-interactions / polish ---------- */
+  /* Visible by default — JS opts elements into the hidden pre-reveal state only if it can guarantee it will reveal them. */
+  .reveal{opacity:1;transform:none;}
+  .reveal.reveal-init{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.reveal-init.in{opacity:1;transform:translateY(0);}
+
+  .btn-primary{box-shadow:0 10px 24px -10px rgba(18,24,26,0.45);}
+  .btn:hover{transform:translateY(-1px);}
+  .btn{transition:all .18s ease, transform .18s ease;}
+
+  .skill-card{transition:background .18s ease;}
+  .skill-card:hover{background:#FAFBF9;}
+  .skill-tags span{transition:background .15s ease, color .15s ease, transform .15s ease;}
+  .skill-tags span:hover{background:var(--accent);color:#fff;transform:translateY(-1px);}
+
+  .proj-card{box-shadow:0 1px 2px rgba(18,24,26,0.03);}
+  .proj-card:hover{box-shadow:0 18px 36px -18px rgba(18,24,26,0.22);}
+  .proj-link{transition:gap .15s ease;}
+  .proj-card:hover .proj-link{gap:9px;}
+
+  .ach-item{transition:padding-left .18s ease, border-color .18s ease;}
+  .ach-item:hover{padding-left:6px;border-color:var(--accent);}
+
+  .contact-links a{transition:all .18s ease, transform .18s ease;}
+  .contact-links a:hover{transform:translateX(3px);}
+
+  .navlinks a{position:relative;}
+  .navlinks a::after{
+    content:'';position:absolute;left:0;right:0;bottom:-4px;height:1px;
+    background:var(--accent);transform:scaleX(0);transform-origin:left;
+    transition:transform .18s ease;
+  }
+  .navlinks a:hover::after{transform:scaleX(1);}
+  .navlinks a.active{color:var(--ink);}
+  .navlinks a.active::after{transform:scaleX(1);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">PRATHAMESH<span>.</span>SONAWANE</div>
+    <div class="navlinks-wrap">
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Achievements</a>
+      </div>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="fade-in">
+      <div class="eyebrow">AI &amp; Data Science Engineer</div>
+      <h1>Building with data,<br>trained to <em>learn fast.</em></h1>
+      <p class="hero-lede">B.E. graduate in Artificial Intelligence &amp; Data Science from Savitribai Phule Pune University — grounded in Python, SQL, and machine learning, and shipping real applications from AI chatbots to IoT systems.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View projects →</a>
+        <a href="#contact" class="btn btn-secondary">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="datastrip">
+  <div class="wrap">
+    <div class="datacell"><div class="k">CGPA</div><div class="v">9.30 / 10</div></div>
+    <div class="datacell"><div class="k">Graduating</div><div class="v">2026</div></div>
+    <div class="datacell"><div class="k">Core Stack</div><div class="v">Python · SQL</div></div>
+    <div class="datacell"><div class="k">Based in</div><div class="v">Pune, India</div></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">01 — About</div>
+      <h2>Profile</h2>
+    </div>
+    <p class="about-body reveal">
+      B.E. graduate in <strong>Artificial Intelligence and Data Science</strong> with a strong foundation in Python, SQL, software development, and data analytics. Familiar with database management, machine learning, and building applications through academic projects and internships — from AI-powered chatbots to IoT-connected systems. <strong>Eager to contribute to software engineering</strong> and continuously learn modern technologies.
+    </p>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">02 — Experience</div>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="xp-item reveal">
+      <div class="xp-role-date">CURRENT / RECENT</div>
+      <div>
+        <div class="xp-title">Web Development Intern</div>
+        <div class="xp-org">Prodigy Infotech</div>
+        <ul>
+          <li>Developed and deployed responsive web applications using HTML, CSS, JavaScript, and Bootstrap.</li>
+          <li>Implemented interactive user interfaces and optimized website performance for improved user experience.</li>
+          <li>Collaborated with mentors to build real-world projects while following software development best practices.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">03 — Skills</div>
+      <h2>Technical toolkit</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="cat">Programming</div>
+        <div class="skill-tags"><span>Python</span><span>SQL</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="cat">Databases</div>
+        <div class="skill-tags"><span>MySQL</span><span>MongoDB</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="cat">Operating Systems</div>
+        <div class="skill-tags"><span>Linux (Ubuntu)</span><span>Windows</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="cat">Tools</div>
+        <div class="skill-tags"><span>Git</span><span>GitHub</span><span>Jupyter</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="cat">Analytics</div>
+        <div class="skill-tags"><span>Pandas</span><span>NumPy</span><span>Tableau</span><span>Excel</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="cat">Core Concepts</div>
+        <div class="skill-tags"><span>DSA</span><span>OOP</span><span>DBMS</span><span>ML</span><span>Cloud Computing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">04 — Projects</div>
+      <h2>Selected work</h2>
+      <p class="section-sub">Applications built end-to-end, from data pipeline to interface.</p>
+    </div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <div class="proj-num">01</div>
+        <div class="proj-title">VizChat</div>
+        <p class="proj-desc">AI-powered chatbot enabling natural-language data analysis and visualization, with intelligent query-processing workflows and scalable backend pipelines for interactive dashboards.</p>
+        <a href="https://github.com/prathamesh9112004/VizChat1" class="proj-link">View on GitHub →</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">02</div>
+        <div class="proj-title">Team Task Manager</div>
+        <p class="proj-desc">MERN stack team task management system with JWT authentication, project management, task tracking, and dashboard analytics.</p>
+        <a href="https://github.com/prathamesh9112004/TeamTaskManager" class="proj-link">View on GitHub →</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">03</div>
+        <div class="proj-title">NetDrive</div>
+        <p class="proj-desc">IoT-based smart car system controlled through Wi-Fi connectivity, with wireless communication between a mobile interface and vehicle controller for real-time remote control.</p>
+        <span class="proj-link" style="color:var(--ink-faint);">Academic project</span>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">04</div>
+        <div class="proj-title">Power BI E-commerce Dashboard</div>
+        <p class="proj-desc">Interactive Power BI dashboard for e-commerce sales analysis, turning raw transaction data into actionable business insights.</p>
+        <a href="https://github.com/prathamesh9112004/PowerBI-Ecommerce-Sales-Dashboard" class="proj-link">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-num">05 — Achievements</div>
+      <h2>Certifications &amp; recognition</h2>
+    </div>
+    <div class="ach-list reveal">
+      <div class="ach-item"><span class="name">Accenture Australia — Technology Consulting Job Simulation</span><span class="year">2026</span></div>
+      <div class="ach-item"><span class="name">EY — Technology Risk Virtual Job Simulation</span><span class="year">2026</span></div>
+      <div class="ach-item"><span class="name">Deloitte — Data Analytics Job Simulation</span><span class="year">2026</span></div>
+      <div class="ach-item"><span class="name">Python Programming — Udemy Certification</span><span class="year">2025</span></div>
+      <div class="ach-item"><span class="name">Chatbot Development — Udemy Certification</span><span class="year">2025</span></div>
+      <div class="ach-item"><span class="name">Data Visualization with R — Johns Hopkins University (Coursera)</span><span class="year">2025</span></div>
+      <div class="ach-item"><span class="name">Cybersecurity Analyst Simulation — Tata Group (Forage)</span><span class="year">2024</span></div>
+      <div class="ach-item"><span class="name">4th Prize — SNJB Ideation Challenge</span><span class="year">2022</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel reveal">
+      <div>
+        <div class="section-num" style="color:#7FE0C2;">06 — Contact</div>
+        <h2>Let's build something.</h2>
+        <p class="section-sub">Open to opportunities in software engineering, data analytics, and AI development.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:prathameshsonawane1212@gmail.com">Email <span class="arrow">→</span></a>
+        <a href="tel:+919356951812">+91 93569 51812 <span class="arrow">→</span></a>
+        <a href="https://github.com/prathamesh9112004">GitHub <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Prathamesh Sonawane</span>
+    <span>Pune, Maharashtra, India</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll-reveal (fails safe: content stays visible unless we can guarantee it gets revealed)
+  try{
+    const revealEls = document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      revealEls.forEach(el=>el.classList.add('reveal-init'));
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+      revealEls.forEach(el=>io.observe(el));
+      // Safety net: if anything is never observed as intersecting (engine quirks, etc.), force-reveal it.
+      setTimeout(()=>revealEls.forEach(el=>el.classList.add('in')), 2500);
+    }
+  }catch(err){
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+  }
+
+  // Scrollspy nav
+  const navLinks = document.querySelectorAll('.navlinks a');
+  const sections = Array.from(navLinks).map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const id = '#' + entry.target.id;
+      const link = document.querySelector('.navlinks a[href="'+id+'"]');
+      if(!link) return;
+      if(entry.isIntersecting){
+        navLinks.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>
